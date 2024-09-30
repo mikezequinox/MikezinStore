@@ -1,4 +1,4 @@
-import ProductService from "../services/ProductService.js"
+import ProductService from "./Service.js"
 
 class ProductController
 {
@@ -6,9 +6,11 @@ class ProductController
     {
         if(!req || Object.keys(req.body).length === 0)
             return res.status(400).json("Undefined request: cannot send a null or empty value")
-        
-        var newProduct = req.body
-        var result = await ProductService.createProduct(newProduct)
+    
+        var result = await ProductService.createProduct(req.body)
+
+        if(!result)
+            return res.status(400).json("Product not added")
 
         return res.json(result)
     }
@@ -22,6 +24,9 @@ class ProductController
 
         var result = await ProductService.findProduct(ID)
 
+        if(!result)
+            return res.status(400).json("Product not found")
+
         return res.json(result)
     }
 
@@ -34,6 +39,9 @@ class ProductController
 
         var result = await ProductService.deleteProduct(ID)
 
+        if(!result)
+            return res.status(400).json("Product not deleted")
+
         return res.json(result)
     }
 
@@ -43,7 +51,11 @@ class ProductController
 
         if(!productUpdated)
             return res.status(400).json("Undefined request: parameter 'productUpdated' missing in the request")
+
         var result = await ProductService.updateProduct(productUpdated)
+
+        if(!result)
+            return res.status(400).json("Product not updated")
 
         return res.json(result)
     }
