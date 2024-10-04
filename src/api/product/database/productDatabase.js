@@ -1,6 +1,7 @@
 import mysql from 'mysql2/promise'
+import LOGGER from '../../../config/logger.js';
 
-const CONNECTION = mysql.createPool({
+const PRODUCT_DB = mysql.createPool({
     host:'localhost',
     port:'3306',
     user: 'root',
@@ -15,11 +16,22 @@ const CONNECTION = mysql.createPool({
     keepAliveInitialDelay : 0,
 })
 
+async function testConnection()
+{
+    try{
+        const CONNECTION = await PRODUCT_DB.getConnection()
+        CONNECTION.release()
+    }catch(error){
+         LOGGER.error(`Lost product database connection: ${error.message}`)
+    }
+}
+  
+testConnection();
+
 export const QUERY = async(sqlInstruction, value = '') =>{
     try{
-        var [result] = await CONNECTION.query(sqlInstruction, value)
+        var [result] = await PRODUCT_DB.query(sqlInstruction, value)
     }catch(error){
-        logger.info(error)
         throw new Error('Error while doing the query')
     }
     return result

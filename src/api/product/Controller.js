@@ -1,4 +1,4 @@
-import logger from "../../logger/index.js"
+import logger from "../../config/logger.js"
 import ProductService from "./Service.js"
 
 class ProductController

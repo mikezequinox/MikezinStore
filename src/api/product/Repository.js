@@ -1,4 +1,4 @@
-import logger from '../../logger/index.js'
+import logger from '../../config/logger.js'
 import QUERY from './database/productDatabase.js'
 
 class ProductRepository
@@ -16,7 +16,7 @@ class ProductRepository
             var result = await QUERY(INSERT, newProduct)
         }catch(error)
         {
-            logger.info(error + 'An unexpected error occurred while inserting the product into the database.')
+            logger.warn(error.message + '. An unexpected error occurred while inserting the product in the database.')
             return null
         }
 
@@ -31,7 +31,7 @@ class ProductRepository
             var result = await QUERY(SELECT, id)
         }catch(error)
         {
-            logger.info(error)
+            logger.warn(error.message +'. An unexpected error occurred while searching the product in the database.')
             return null
         }
         
@@ -54,7 +54,7 @@ class ProductRepository
             var result = await QUERY(UPDATE, [productUpdated, productUpdated.id])
         }catch(error)
         {   
-            logger.info(error)
+            logger.warn(error.message +'. An unexpected error occurred while updating the product in the database.')
             return null 
         }
 
@@ -74,7 +74,7 @@ class ProductRepository
             var result = await QUERY(DELETE, id)
         }catch(error)
         {
-            logger.info(error)
+            logger.warn(error.message + '. An unexpected error occurred while deleting the product of the database.')
             return null 
         }
 
