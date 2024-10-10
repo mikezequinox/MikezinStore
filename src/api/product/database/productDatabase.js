@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 const PRODUCT_DB = mysql.createPool({
-    host: process.env.PRODUCT_DB_HOST,
+    host:process.env.PRODUCT_DB_HOST,
     port:process.env.PRODUCT_DB_PORT,
     user: process.env.PRODUCT_DB_USER,
     password: process.env.PRODUCT_DB_PASS,
