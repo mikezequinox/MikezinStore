@@ -1,4 +1,3 @@
-import logger from "../../config/logger.js"
 import ProductService from "./Service.js"
 
 class ProductController
@@ -6,10 +5,10 @@ class ProductController
     async createProduct(req, res)
     {
         if(!req || Object.keys(req.body).length === 0)
-            return res.status(400).json('Undefined request: cannot send a null or empty value')
-    
+            return res.status(400).json('Undefined request: cannot send a null or empty request')
+        
         var result = await ProductService.createProduct(req.body)
-
+    
         if(!result)
             return res.status(400).json('Product not added')
             
@@ -20,9 +19,6 @@ class ProductController
     {
         const ID = req.params.id
 
-        if(!ID)
-            return res.status(400).json('Undefined request: parameter ID missing in the request')
-           
         var result = await ProductService.findProduct(ID)
 
         if(!result)
@@ -35,9 +31,6 @@ class ProductController
     {
         const ID = req.params.id
 
-        if(!ID)
-            return res.status(400).json('Undefined request: parameter ID missing in the request')
-            
         var result = await ProductService.deleteProduct(ID)
 
         if(!result)
@@ -48,10 +41,10 @@ class ProductController
 
     async updateProduct(req,res)
     {
+        if(!req || Object.keys(req.body).length === 0)
+            return res.status(400).json('Undefined request: cant send a null or empty request')
+        
         const productUpdated = req.body
-
-        if(!productUpdated)
-            return res.status(400).json('Undefined request: parameter "productUpdated" missing in the request')
            
         var result = await ProductService.updateProduct(productUpdated)
 

@@ -1,4 +1,5 @@
 import {initProductRoutes} from './product/routes.js'
+import { initUserRoutes } from './user/routes.js'
 import {registerMiddlewares,errorHandler} from './middlewares/index.js'
 
 export function initAllRoutes(router)
@@ -8,7 +9,8 @@ export function initAllRoutes(router)
     router.get('/', (req,res) =>{
         res.json('tela inicial')
     })
+    router.use('/product', initProductRoutes())
+    router.use('/user', initUserRoutes())
 
-    router.use('/product/', initProductRoutes())
     errorHandler(router)
 }
