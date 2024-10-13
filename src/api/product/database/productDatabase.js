@@ -2,6 +2,7 @@ import createDBPool from '../../../config/dbConfig.js'
 
 const productDB = createDBPool(process.env.PRODUCT_DB)
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 const PRODUCT_DB = mysql.createPool({
     host: process.env.PRODUCT_DB_HOST,
@@ -22,6 +23,9 @@ async function testConnection()
 =======
 async function QUERY(sqlInstruction, value = '')
 >>>>>>> Stashed changes
+=======
+async function QUERY(sqlInstruction, value = '')
+>>>>>>> 6794707fdb8e4cf9774f20c4c54abfc205cbaced
 {
     try{
         var [result] = await productDB.query(sqlInstruction, value)

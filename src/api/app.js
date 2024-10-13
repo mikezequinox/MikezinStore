@@ -1,4 +1,5 @@
 import express from 'express'
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 import { initProductRoutes } from './product/routes.js'
 import logger from '../config/logger.js';
@@ -7,22 +8,12 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 >>>>>>> Stashed changes
+=======
+import dotenv from 'dotenv'
+
+dotenv.config()
+>>>>>>> 6794707fdb8e4cf9774f20c4c54abfc205cbaced
 
 const app = express()
-
-app.use(express.json())//config
-
-app.use((err, req, res, next) => {
-    if ((err instanceof SyntaxError) && (err.status === 400) && ('body' in err))
-        return res.status(400).json({ error: "JSON de entrada inválido" });
-
-    next();
-});
-
-app.use(`/product/`, initProductRoutes())//start routes
-
-app.use((req, res) => {
-    res.status(404).json('error: Rota não encontrada');//error handler
-});
 
 export default app
