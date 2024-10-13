@@ -7,7 +7,7 @@ class ProductRepository
     {
         const INSERT = 'INSERT into produtos.registrados SET ?;'
 
-        var exist = this.find(newProduct.id)
+        var exist = await this.find(newProduct.id)
 
         if(exist)
         {
