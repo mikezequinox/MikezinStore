@@ -1,9 +1,8 @@
-import mysql from 'mysql2/promise'
-import LOGGER from '../../../config/logger.js';
-import dotenv from 'dotenv'
+import createDBPool from '../../../config/dbConfig.js'
 
-dotenv.config();
+const productDB = createDBPool(process.env.PRODUCT_DB)
 
+<<<<<<< Updated upstream
 const PRODUCT_DB = mysql.createPool({
     host: process.env.PRODUCT_DB_HOST,
     port:process.env.PRODUCT_DB_PORT,
@@ -20,20 +19,12 @@ const PRODUCT_DB = mysql.createPool({
 })
 
 async function testConnection()
+=======
+async function QUERY(sqlInstruction, value = '')
+>>>>>>> Stashed changes
 {
     try{
-        const CONNECTION = await PRODUCT_DB.getConnection()
-        CONNECTION.release()
-    }catch(error){
-         LOGGER.error(`Lost product database connection: ${error.message}`)
-    }
-}
-  
-testConnection();
-
-export const QUERY = async(sqlInstruction, value = '') =>{
-    try{
-        var [result] = await PRODUCT_DB.query(sqlInstruction, value)
+        var [result] = await productDB.query(sqlInstruction, value)
     }catch(error){
         throw new Error('Error while doing the query')
     }

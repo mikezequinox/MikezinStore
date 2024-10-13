@@ -1,6 +1,12 @@
 import express from 'express'
+<<<<<<< Updated upstream
 import { initProductRoutes } from './product/routes.js'
 import logger from '../config/logger.js';
+=======
+import dotenv from 'dotenv'
+
+dotenv.config()
+>>>>>>> Stashed changes
 
 const app = express()
 

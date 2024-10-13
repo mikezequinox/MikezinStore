@@ -6,26 +6,24 @@ class ProductService
 {
     async createProduct(newProduct)
     {
-        const REQUIRED_PROPS = ['id','price','name','stock','description']
-        var hasAllProperties = REQUIRED_PROPS.every(prop => prop in newProduct)
+        const REQUIRED_KEYS = ['id','price','name','stock','description']
+        var hasAllKeys = REQUIRED_KEYS.every(prop => prop in newProduct)
 
-        if(!hasAllProperties)
+        if(!hasAllKeys)
         {   
-            logger.info('Cant add a new product, because: missing necessary properties')
+            logger.info('Cant add a new product, because: missing necessary keys in the product object')
             return null
         }
             
-        if(Object.keys(newProduct).length !== REQUIRED_PROPS.length)
+        if(Object.keys(newProduct).length !== REQUIRED_KEYS.length)
         {
-            logger.info('Cant add a new product, because: unnecessary properties in the request') 
+            logger.info('Cant add a new product, because: invalid keys in the product object') 
             return null
         }
-            
-        if(typeof newProduct.id !== 'string')
-        {
-            logger.info('Cant add a new product, because: the ID field type must be a string') 
-            return null
-        }
+
+        newProduct.id = String(newProduct.id)
+        newProduct.name = String(newProduct.name)
+        newProduct.description = String(newProduct.description)
 
         if(!StringUtils.isValidLength(newProduct.id,5))
         {
@@ -33,22 +31,10 @@ class ProductService
             return null
         }
 
-        if(typeof newProduct.name !== 'string')
-        {
-            logger.info('Cant add a new product, because:the NAME field must be a string')
-            return null
-        }
-
         if(!StringUtils.isValidLength(newProduct.name,10))
         {
             newProduct.name = newProduct.name.substring(0,10)
-            logger.info('The NAME FIELD is too long(>10). The value will be truncated')
-        }
-
-        if(typeof newProduct.description !== 'string')
-        {
-            logger.info('Cant add a new product, because:the DESCRIPTION field must be a string')
-            return null
+            logger.info('The NAME field is too long(>10). The value will be truncated')
         }
 
         if(!StringUtils.isValidLength(newProduct.description,30))
@@ -80,43 +66,52 @@ class ProductService
             logger.info('Cant add a new product, because:the STOCK field cannot have a negative value')
             return null
         }
-
+        
         return await ProductRepository.create(newProduct) 
     }
 
     async findProduct(id)
     {
-        if(typeof id !== 'string')
-        {   
-            logger.info('The argument ID must be of type string')
+        if(!id)
+        {
+            logger.info('Cant find the product, because: the ID field cant be empty.')
             return null
         }
 
+        id = String(id)
+        
         return await ProductRepository.find(id)
     }
 
     async deleteProduct(id)
     {
-        if(typeof id !== 'string')
+        if(!id)
         {
-            logger.info('The argument ID must be of type string')
+            logger.info('Cant delete the product, because: the ID field cant be empty.')
             return null
         }
-            
+
+        id = String(id)
+   
         return await ProductRepository.delete(id)
     }
 
     async updateProduct(productUpdated)
     {
-        if(typeof productUpdated.id !== 'string')
+        if(!productUpdated.id)
         {   
-            logger.info('The ID field must be of type string')
+            logger.info('Cant update the product, because: The ID field cannot be empty')
             return null
         }
 
-        if(productUpdated.id ==='')
-        {   
-            logger.info('The ID field cannot be empty')
+        productUpdated.id = String(productUpdated.id)
+
+        const VALID_KEYS = ['id','price','name','stock','description']
+        const hasInvalidKey = Object.keys(productUpdated).some(key => !VALID_KEYS.includes(key))
+        
+        if(hasInvalidKey)
+        {
+            logger.info('Cant update a product, because: invalid keys in the product object') 
             return null
         }
 
