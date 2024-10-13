@@ -6,6 +6,6 @@ const PORT = 3000
 
 initAllRoutes(app)
 
-app.listen(PORT, () => {LOGGER.info(`Server is running at port ${PORT}`)})
+app.listen(PORT, () => {LOGGER.info(`Server is running at port ${PORT}`)});
 
 

@@ -1,5 +1,5 @@
 import logger from '../../config/logger.js'
-import QUERY from './database/userDatabase.js'
+import QUERY from './database/userDatabase.js';
 
 class UserRepository
 {

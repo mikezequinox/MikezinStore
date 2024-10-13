@@ -1,5 +1,5 @@
 import express from 'express';
-import ProductController from './Controller.js'
+import ProductController from './Controller.js';
 
 export function initProductRoutes()
 {   

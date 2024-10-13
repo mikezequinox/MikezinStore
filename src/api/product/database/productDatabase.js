@@ -12,4 +12,4 @@ async function QUERY(sqlInstruction, value = '')
     return result
 }
 
-export default QUERY
+export default QUERY;

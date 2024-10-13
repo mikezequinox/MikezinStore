@@ -12,5 +12,5 @@ export function initAllRoutes(router)
     router.use('/product', initProductRoutes())
     router.use('/user', initUserRoutes())
 
-    errorHandler(router)
+    errorHandler(router);
 }

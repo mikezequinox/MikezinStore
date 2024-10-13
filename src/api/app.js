@@ -5,4 +5,4 @@ dotenv.config()
 
 const app = express()
 
-export default app
+export default app;

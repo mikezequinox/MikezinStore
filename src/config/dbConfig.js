@@ -1,5 +1,5 @@
 import mysql from 'mysql2/promise'
-import LOGGER from './logger.js'
+import LOGGER from './logger.js';
 
 function createDBPool(DB_NAME)
 {

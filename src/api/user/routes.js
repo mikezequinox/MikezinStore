@@ -1,5 +1,5 @@
 import express from "express"
-import UserController from './Controller.js'
+import UserController from './Controller.js';
 
 export function initUserRoutes()
 {

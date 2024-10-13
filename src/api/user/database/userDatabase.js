@@ -1,4 +1,4 @@
-import createDBPool from '../../../config/dbConfig.js';
+import createDBPool from '../../../config/dbConfig.js'
 
 const userDB = createDBPool(process.env.USER_DB)
 

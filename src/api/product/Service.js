@@ -1,6 +1,6 @@
 import ProductRepository from "./Repository.js"
 import StringUtils from "../utils/StringUtils.js"
-import logger from "../../config/logger.js"
+import logger from "../../config/logger.js";
 
 class ProductService
 {
